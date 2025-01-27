@@ -1,12 +1,22 @@
+import { ErrorNotification } from '@/shared/ErrorNotification/ErrorNotification';
 import { Button } from '../shared/Button/Button';
 import { Input } from '@/shared/input/input';
 import { Colors, Gaps } from '@/shared/tokens';
 import { StyleSheet, View, Text, Image } from 'react-native';
+import { useState } from 'react';
 
 
 export default function HomeScreen() {
+
+  const [error, setError] = useState<string | undefined>();
+
+  const alert = () => {
+    setError('Неверный логин или пароль')
+  }
+
   return (
     <View style={styles.container}>
+      <ErrorNotification error={error}/>
       <View style={styles.content}>
         <Image
           style={styles.logo}
@@ -16,7 +26,7 @@ export default function HomeScreen() {
         <View style={styles.form}>
           <Input placeholder='Email' />
           <Input isPassword placeholder='Пароль' />
-          <Button text='Войти'/>
+          <Button text='Войти' onPress={alert}/>
         </View>
         <Text>Восстановить пароль</Text>
       </View>
