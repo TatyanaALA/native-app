@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 import { ErrorNotificationProps } from "./ErrorNotificationProps";
-import { View, Text, StyleSheet, Dimensions} from 'react-native';
+import { Text, StyleSheet, Dimensions, Animated} from 'react-native';
 import { Colors, Fonts } from "../tokens";
 
 export function ErrorNotification({ error }: ErrorNotificationProps) {
 	const [isShown, setIsShown] = useState<boolean>(false);
+	const animatedValue = new Animated.Value(-100); 
+	const onEnter = () => {
+		Animated.timing(animatedValue, {
+			toValue: 0,
+			duration: 400,
+			useNativeDriver: true
+		}).start();
+	};
+
 
 	useEffect(() => {
 		if (!error) {
@@ -24,9 +33,14 @@ export function ErrorNotification({ error }: ErrorNotificationProps) {
 	}
 
 	return(
-		<View style={styles.error}>
+		<Animated.View style={{
+			...styles.error,
+			transform: [
+				{translateY: animatedValue}
+			]
+		}} onLayout={onEnter}>
 			<Text style={styles.errorText}>{error}</Text>
-		</View>
+		</Animated.View>
 	) 
 }
 
@@ -37,7 +51,6 @@ const styles = StyleSheet.create({
 		width: Dimensions.get('screen').width,
 		backgroundColor: Colors.red,
 		padding: 15
-		
 	},
 	errorText: {
 		fontSize: Fonts.f16,
