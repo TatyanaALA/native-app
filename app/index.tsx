@@ -4,9 +4,10 @@ import { Input } from '@/shared/input/input';
 import { Colors, Gaps } from '@/shared/tokens';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { useState } from 'react';
+import { Link } from 'expo-router';
 
 
-export default function HomeScreen() {
+export default function Login() {
 
   const [error, setError] = useState<string | undefined>();
 
@@ -31,7 +32,9 @@ export default function HomeScreen() {
           <Input isPassword placeholder='Пароль' />
           <Button text='Войти' onPress={alert}/>
         </View>
-        <Text>Восстановить пароль</Text>
+        <Link href={'/restore'}>
+          <Text>Восстановить пароль</Text>
+        </Link>
       </View>
     </View>
   );
