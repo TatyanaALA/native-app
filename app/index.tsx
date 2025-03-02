@@ -2,9 +2,9 @@ import { ErrorNotification } from '@/shared/ErrorNotification/ErrorNotification'
 import { Button } from '../shared/Button/Button';
 import { Input } from '@/shared/input/input';
 import { Colors, Gaps } from '@/shared/tokens';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { useState } from 'react';
-import { Link } from 'expo-router';
+import { CustomLink } from '@/shared/CustomLink/CustomLink';
 
 
 export default function Login() {
@@ -32,9 +32,7 @@ export default function Login() {
           <Input isPassword placeholder='Пароль' />
           <Button text='Войти' onPress={alert}/>
         </View>
-        <Link href={'/restore'}>
-          <Text>Восстановить пароль</Text>
-        </Link>
+        <CustomLink href={'/restore'} text="Восстановить пароль" />
       </View>
     </View>
   );
